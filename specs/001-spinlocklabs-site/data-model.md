@@ -57,7 +57,7 @@ One TypeScript module (`src/data/site.ts`) plus one configuration value (`site` 
 | defaultMeta.description | string | one-sentence lab description | head meta default, FR-013 |
 | defaultMeta.keywords | string[] | lab and topic terms | head meta |
 | defaultMeta.ogImage | { src, alt } | `/banner.png`, 1200x630 | og:/twitter: meta, FR-013/SC-008 |
-| site (astro.config) | url | `https://spinlocklabs.github.io` (placeholder) | canonical URLs, sitemap, FR-012 |
+| site (astro.config) | url | `https://spinlocklabs.com` | canonical URLs, sitemap, FR-012 |
 
 ## Relationships
 

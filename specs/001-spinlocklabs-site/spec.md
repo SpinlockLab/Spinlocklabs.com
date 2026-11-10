@@ -94,7 +94,7 @@ A visitor follows a stale link or mistypes an address. The site shows a not-foun
 - **Long titles and tags**: A project or post with a very long title wraps without breaking the list layout. A project with many tags does not push the summary text off-screen.
 - **External links**: Links to external resources (the radiance project repository, the ZTA Security site) open in a new browsing context and are marked as external.
 - **Status vocabulary**: A project's status is drawn from a fixed small set (for example, Active, Ongoing, Public call). An unknown status value fails the build instead of rendering silently.
-- **Placeholder domain**: The site is built and served before its final domain is decided. A single configuration point holds the site address used in links, the sitemap, and shared-page metadata, so the domain change later is a one-line edit.
+- **Site domain**: The site is served at spinlocklabs.com. A single configuration point holds the site address used in links, the sitemap, and shared-page metadata, so a domain change is a one-line edit.
 
 ## Requirements *(mandatory)*
 
@@ -141,7 +141,7 @@ A visitor follows a stale link or mistypes an address. The site shows a not-foun
 ## Assumptions
 
 - The site is static. There are no accounts, no forms, and no server-side data processing.
-- The final domain is not yet decided. A placeholder site address is used in configuration until the GitHub Pages target is chosen, and it is changeable in one place.
+- The site is served at spinlocklabs.com (GitHub Pages custom domain). The address is set in one place.
 - No analytics or tracking is used on the site.
 - The contact email belongs to the parent organization (ZTA Security) and is the single contact channel for the lab.
 - At launch the site carries exactly one research project (radiance) and zero blog posts. The structure must support more of both without code changes.

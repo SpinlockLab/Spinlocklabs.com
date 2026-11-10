@@ -28,7 +28,7 @@ Rules:
 
 | Key | Shape | Launch value | Notes |
 |-----|-------|--------------|-------|
-| `site` | URL | `https://spinlocklabs.github.io` | **Placeholder.** When the GitHub Pages target is decided, this is the one-line change (spec edge case "Placeholder domain"). It drives canonical URLs, the sitemap, and og:url. |
+| `site` | URL | `https://spinlocklabs.com` | GitHub Pages custom domain (repo `CNAME`). It drives canonical URLs, the sitemap, and og:url. |
 
 Rules:
 

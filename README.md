@@ -36,6 +36,6 @@ src/
 
 ## Deployment
 
-GitHub Pages via `.github/workflows/deploy.yml`. Before the first deploy, set
-the real domain in `astro.config.mjs` (`site`) and the Pages target in the
-GitHub repository settings.
+GitHub Pages via `.github/workflows/deploy.yml`, served at
+[spinlocklabs.com](https://spinlocklabs.com) (custom domain set in the
+repository's Pages settings; `site` in `astro.config.mjs` must match it).

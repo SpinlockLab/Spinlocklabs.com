@@ -2,10 +2,10 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
-// Set the real domain here when the GitHub Pages target is chosen.
-// The build does not depend on this value except for sitemap/OG URLs.
+// Canonical site URL (GitHub Pages custom domain, see CNAME). Drives canonical
+// links, the sitemap, and og:url.
 export default defineConfig({
-  site: "https://spinlocklabs.github.io",
+  site: "https://spinlocklabs.com",
   // Preserve Astro 5/6 HTML-aware whitespace compression. Astro 7 changed the
   // default to "jsx" (JSX-style stripping), which would glue adjacent inline
   // elements on separate source lines together.

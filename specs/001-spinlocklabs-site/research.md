@@ -42,7 +42,7 @@ No NEEDS CLARIFICATION markers remained in the Technical Context; every open que
 ## R5. Deployment: GitHub Pages via `withastro/action`
 
 - **Decision**: GitHub Pages, built by `.github/workflows/deploy.yml` (checkout → pnpm → `withastro/action@v2` → `actions/deploy-pages@v4`) on every push to `main` and on manual dispatch.
-- **Rationale**: The user specified GitHub Pages and the ZTA site deploys the same way, so the workflow is a proven copy with org-specific values removed. The `site` URL in `astro.config.mjs` is a single placeholder (`https://spinlocklabs.github.io`) until the user picks the Pages target; changing it is a one-line edit (spec edge case "Placeholder domain").
+- **Rationale**: The user specified GitHub Pages and the ZTA site deploys the same way, so the workflow is a proven copy with org-specific values removed. The `site` URL in `astro.config.mjs` is `https://spinlocklabs.com`, the Pages custom domain (repo `CNAME`); it is the single place the domain is set.
 - **Alternatives considered**:
   - *Netlify/Vercel*. Rejected: user specified GitHub Pages.
   - *Subpath of ztasecurity.com*. Considered during intake; the user chose GitHub Pages for the lab.
