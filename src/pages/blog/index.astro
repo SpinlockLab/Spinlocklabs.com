@@ -1,0 +1,43 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import PostList from "@components/PostList.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const title = "Blog — SpinlockLabs";
+const description =
+  "Write-ups of methods, measurements, and findings from the lab.";
+---
+
+<AppLayout title={title} description={description}>
+  <div class="mx-auto max-w-5xl px-6 pt-20">
+    <h1 class="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+      Blog
+    </h1>
+    <p class="mb-12 mt-4 max-w-2xl text-lg leading-relaxed text-ink-500">
+      {description}
+    </p>
+    {
+      posts.length > 0 ? (
+        <PostList posts={posts} />
+      ) : (
+        <div class="rounded-xl border border-dashed border-line-strong px-6 py-16 text-center">
+          <p class="font-serif text-xl font-medium text-ink">
+            No posts yet
+          </p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-500">
+            The first write-up lands when a probe set has produced stable
+            numbers. Until then, read the{" "}
+            <a href="/research/" class="underline underline-offset-2">
+              research pages
+            </a>
+            .
+          </p>
+        </div>
+      )
+    }
+  </div>
+</AppLayout>

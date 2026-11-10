@@ -1,0 +1,48 @@
+---
+import Logo from "@components/Logo.astro";
+import { email, socials } from "@data/site";
+
+const year = new Date().getFullYear();
+
+const links = [
+  { href: "/research/", text: "Research" },
+  { href: "/blog/", text: "Blog" },
+  { href: `mailto:${email}`, text: email },
+];
+---
+
+<footer class="mt-24 border-t border-line">
+  <div
+    class="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-10 sm:flex-row sm:items-start sm:justify-between"
+  >
+    <div class="space-y-3">
+      <a href="/" aria-label="SpinlockLabs home"><Logo /></a>
+      <p class="text-sm text-ink-500">
+        A research lab under
+        <a
+          href={socials.zta}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-line-strong underline-offset-2 hover:text-ink"
+          >ZTA Security</a
+        >. &copy; 2026&ndash;{year}.
+      </p>
+    </div>
+    <ul class="flex flex-col gap-4 sm:items-end">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-ink-500 transition-colors hover:text-ink"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </ul>
+  </div>
+</footer>

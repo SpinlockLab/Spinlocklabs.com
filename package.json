@@ -1,0 +1,26 @@
+{
+  "name": "spinlocklabs",
+  "version": "0.2.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/inter": "^5.2.5",
+    "@fontsource-variable/jetbrains-mono": "^5.2.5",
+    "@fontsource-variable/source-serif-4": "^5.3.1",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.10",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.8.3"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "packageManager": "pnpm@9.15.9"
+}

@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projects: CollectionEntry<"research">[];
+}
+
+const { projects } = Astro.props;
+
+const statusStyle: Record<string, string> = {
+  Active: "bg-ink text-white",
+  Ongoing: "bg-paper-200 text-ink-700",
+  "Public call": "bg-accent text-white",
+};
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<ul class="divide-y divide-line border-y border-line">
+  {
+    projects.map((project) => (
+      <li>
+        <a
+          href={`/research/${project.id}/`}
+          class="group grid gap-2 py-6 sm:grid-cols-[10rem_1fr] sm:gap-8"
+        >
+          <div class="flex flex-col items-start gap-2 pt-0.5 sm:flex-row sm:items-center">
+            <span
+              class:list={[
+                "rounded-full px-2.5 py-0.5 text-xs font-medium",
+                statusStyle[project.data.status] ?? "bg-paper-200 text-ink-700",
+              ]}
+            >
+              {project.data.status}
+            </span>
+            <time
+              datetime={project.data.updated.toISOString()}
+              class="text-sm text-ink-500"
+            >
+              {formatDate(project.data.updated)}
+            </time>
+          </div>
+          <div>
+            <h3
+              class="font-serif text-xl font-medium tracking-tight decoration-line-strong underline-offset-4 group-hover:underline"
+            >
+              {project.data.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">
+              {project.data.summary}
+            </p>
+            {
+              project.data.tags.length > 0 && (
+                <ul class="mt-3 flex flex-wrap gap-2 font-mono text-xs text-ink-400">
+                  {project.data.tags.map((tag) => (
+                    <li class="rounded border border-line px-1.5 py-0.5">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

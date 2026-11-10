@@ -1,0 +1,26 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import ProjectList from "@components/ProjectList.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("research")).sort(
+  (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
+);
+
+const title = "Research — SpinlockLabs";
+const description =
+  "Ongoing research projects: local large language models for security tasks, measured on our own hardware.";
+---
+
+<AppLayout title={title} description={description}>
+  <div class="mx-auto max-w-5xl px-6 pt-20">
+    <h1 class="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+      Research
+    </h1>
+    <p class="mb-12 mt-4 max-w-2xl text-lg leading-relaxed text-ink-500">
+      Active and completed projects. Each page states the question, the setup,
+      and what has been measured.
+    </p>
+    <ProjectList projects={projects} />
+  </div>
+</AppLayout>

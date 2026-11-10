@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<ul class="divide-y divide-line border-y border-line">
+  {
+    posts.map((post) => (
+      <li>
+        <a
+          href={`/blog/${post.id}/`}
+          class="group grid gap-2 py-6 sm:grid-cols-[10rem_1fr] sm:gap-8"
+        >
+          <time
+            datetime={post.data.pubDate.toISOString()}
+            class="pt-0.5 text-sm text-ink-500"
+          >
+            {formatDate(post.data.pubDate)}
+          </time>
+          <div>
+            <h3
+              class="font-serif text-xl font-medium tracking-tight decoration-line-strong underline-offset-4 group-hover:underline"
+            >
+              {post.data.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">
+              {post.data.description}
+            </p>
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

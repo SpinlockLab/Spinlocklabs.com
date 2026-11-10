@@ -1,0 +1,75 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import Logo from "@components/Logo.astro";
+import { CollectionEntry, getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+const frontmatter = post.data;
+const { Content } = await render(post);
+
+const fullPubDate = frontmatter.pubDate.toLocaleDateString("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<AppLayout
+  title={`${frontmatter.title} — SpinlockLabs`}
+  description={frontmatter.description}
+  pubDate={frontmatter.updatedDate ?? frontmatter.pubDate}
+  tags={frontmatter.tags}
+>
+  <div class="mx-auto max-w-3xl px-6 pt-16">
+    <a
+      href="/blog/"
+      class="text-sm text-ink-500 transition-colors hover:text-ink"
+    >
+      &larr; Blog
+    </a>
+    <header class="mb-10 mt-8">
+      <h1
+        class="font-serif text-3xl font-medium leading-tight tracking-tight sm:text-5xl"
+      >
+        {frontmatter.title}
+      </h1>
+      <p class="mt-5 text-lg leading-relaxed text-ink-500">
+        {frontmatter.description}
+      </p>
+      <div
+        class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-6 text-sm text-ink-500"
+      >
+        <Logo wordmark={false} class="[&>svg]:h-5" />
+        <span class="font-medium text-ink">SpinlockLabs</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={frontmatter.pubDate.toISOString()}>
+          {fullPubDate}
+        </time>
+      </div>
+    </header>
+    <article class="prose prose-lg max-w-none prose-hr:my-10 prose-img:rounded-xl">
+      <Content />
+    </article>
+    {
+      frontmatter.tags.length > 0 && (
+        <ul class="mt-12 flex flex-wrap gap-2 font-mono text-xs text-ink-400">
+          {frontmatter.tags.map((tag) => (
+            <li class="rounded border border-line px-1.5 py-0.5">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</AppLayout>

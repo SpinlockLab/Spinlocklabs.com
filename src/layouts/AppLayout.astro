@@ -1,0 +1,117 @@
+---
+import Logo from "@components/Logo.astro";
+import Footer from "@components/Footer.astro";
+import Link from "@components/Link.astro";
+import { author, defaultMeta, email } from "@data/site";
+import "@fontsource-variable/inter/index.css";
+import "@fontsource-variable/source-serif-4/index.css";
+import "@fontsource-variable/jetbrains-mono/index.css";
+import "@styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: {
+    src: string;
+    alt: string;
+  };
+  pubDate?: Date;
+  tags?: string[];
+  lastmod?: Date;
+}
+
+const {
+  title = defaultMeta.title,
+  description = defaultMeta.description,
+  ogImage = defaultMeta.ogImage,
+  pubDate,
+  tags = defaultMeta.keywords,
+  lastmod,
+} = Astro.props;
+
+const ogImageURL = new URL(ogImage.src, Astro.site).href;
+const canonicalURL = new URL(Astro.url).href;
+const date = pubDate || lastmod || new Date();
+
+const navigation = [
+  { href: "/research/", text: "Research" },
+  { href: "/blog/", text: "Blog" },
+];
+---
+
+<!doctype html>
+<html lang="en" class="overflow-x-hidden break-words bg-paper text-ink">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content={author} />
+    <meta property="og:image:alt" content={ogImage.alt} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={ogImage.alt} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="apple-mobile-web-app-title" content={author} />
+    <meta name="application-name" content={author} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="follow, index" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {tags && tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <meta name="author" content={author} />
+    {pubDate && <meta name="pubdate" content={pubDate.toISOString()} />}
+    <meta name="date" content={date.toISOString()} />
+    <meta name="keywords" content={tags.join(", ")} />
+  </head>
+  <body
+    class="flex min-h-screen flex-col antialiased selection:bg-accent selection:text-white"
+  >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+      >Skip to content</a
+    >
+    <header class="sticky top-0 z-20 border-b border-line bg-paper/90 backdrop-blur">
+      <nav
+        class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6"
+        aria-label="Main"
+      >
+        <a href="/" aria-label="SpinlockLabs home">
+          <Logo />
+        </a>
+        <div class="flex items-center gap-6 sm:gap-8">
+          <ul class="hidden items-center gap-6 sm:flex sm:gap-8">
+            {
+              navigation.map((item) => (
+                <li>
+                  <Link {...item} />
+                </li>
+              ))
+            }
+          </ul>
+          <a
+            href={`mailto:${email}`}
+            class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-ink-700"
+          >
+            Contact
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-1" id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

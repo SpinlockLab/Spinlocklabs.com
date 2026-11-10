@@ -1,0 +1,21 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+const title = "Page not found — SpinlockLabs";
+const description = "The page you are looking for does not exist.";
+---
+
+<AppLayout title={title} description={description}>
+  <div class="mx-auto max-w-5xl px-6 py-32">
+    <p class="text-sm font-medium text-ink-500">404</p>
+    <h1 class="mt-4 font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+      Page not found
+    </h1>
+    <p class="mt-4 text-lg text-ink-500">{description}</p>
+    <a
+      class="mt-10 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ink-700"
+      href="/"
+    >
+      Back to home
+    </a>
+  </div>
+</AppLayout>

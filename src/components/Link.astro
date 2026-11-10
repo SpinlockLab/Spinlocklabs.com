@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  text: string;
+  addClass?: string;
+}
+const { text, addClass, href, ...props } = Astro.props;
+const path = typeof href === "string" ? href : href?.href;
+const isActive =
+  !!path && !path.includes("#") && Astro.url.pathname.startsWith(path);
+---
+
+<a
+  class:list={[
+    "text-sm transition-colors",
+    isActive ? "text-ink font-medium" : "text-ink-500 hover:text-ink",
+    addClass,
+  ]}
+  aria-current={isActive ? "page" : undefined}
+  href={href}
+  {...props}
+>
+  {text}
+</a>

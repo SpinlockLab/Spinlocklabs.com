@@ -1,0 +1,84 @@
+---
+import AppLayout from "@layouts/AppLayout.astro";
+import Logo from "@components/Logo.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"research">;
+  content: any;
+}
+
+const { project, content: Content } = Astro.props;
+const frontmatter = project.data;
+
+const fullUpdated = frontmatter.updated.toLocaleDateString("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<AppLayout
+  title={`${frontmatter.title} — SpinlockLabs`}
+  description={frontmatter.summary}
+  lastmod={frontmatter.updated}
+>
+  <div class="mx-auto max-w-3xl px-6 pt-16">
+    <a
+      href="/research/"
+      class="text-sm text-ink-500 transition-colors hover:text-ink"
+    >
+      &larr; Research
+    </a>
+    <header class="mb-10 mt-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <span
+          class="rounded-full bg-ink px-2.5 py-0.5 text-xs font-medium text-white"
+        >
+          {frontmatter.status}
+        </span>
+        <span class="font-mono text-xs text-ink-400">
+          Updated {fullUpdated}
+        </span>
+      </div>
+      <h1
+        class="mt-4 font-serif text-3xl font-medium leading-tight tracking-tight sm:text-5xl"
+      >
+        {frontmatter.title}
+      </h1>
+      <p class="mt-5 text-lg leading-relaxed text-ink-500">
+        {frontmatter.summary}
+      </p>
+      {
+        frontmatter.externalLinks.length > 0 && (
+          <ul class="mt-6 flex flex-wrap gap-3">
+            {frontmatter.externalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="rounded-full border border-line-strong px-4 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-paper-200"
+                >
+                  {link.label} &nearr;
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <div
+        class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-6 text-sm text-ink-500"
+      >
+        <Logo wordmark={false} class="[&>svg]:h-5" />
+        <span class="font-medium text-ink">SpinlockLabs</span>
+      </div>
+    </header>
+    <article
+      class="prose prose-lg max-w-none prose-hr:my-10 prose-img:rounded-xl"
+    >
+      <Content />
+    </article>
+  </div>
+</AppLayout>
