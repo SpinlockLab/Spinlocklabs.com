@@ -10,10 +10,10 @@ export const socials = {
 export const defaultMeta = {
   title: "SpinlockLabs — AI for cybersecurity research",
   description:
-    "Independent research lab under ZTA Security. We study local large language models for security tasks: capability, failure modes, and the limits of what models can do on our own hardware.",
+    "Independent research lab under ZTASecurity. We study local large language models for security tasks: capability, failure modes, and the limits of what models can do on our own hardware.",
   keywords: [
     "SpinlockLabs",
-    "ZTA Security",
+    "ZTASecurity",
     "AI security",
     "local LLMs",
     "radiance",
